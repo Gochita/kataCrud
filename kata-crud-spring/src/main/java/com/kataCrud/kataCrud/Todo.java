@@ -8,12 +8,16 @@ import javax.persistence.Id;
 
 @Entity
 public class Todo {
+
+    //definicion del modelo to_do
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private Boolean isCompleted;
 
+
+    //Getters y setters
     public Long getId() {
         return id;
     }

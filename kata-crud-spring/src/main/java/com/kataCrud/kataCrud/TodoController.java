@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TodoController {
 
+
+
     @Autowired
     private TodoService service;
 
@@ -16,13 +18,14 @@ public class TodoController {
         return service.list();
 
     }
-
+    //se escribe el comentario del nombre to do por separado ya que lo toma como un to_do real jeje
+    //mapeo para guardar un tod o
     @PostMapping(value = "api/todo")
     public Todo save(@RequestBody Todo todo) {
 
         return service.save(todo);
     }
-
+    //mapeo para editar un tod o
     @PutMapping(value = "api/todo")
     public Todo update(@RequestBody Todo todo) {
         if (todo.getId() != null) {
@@ -30,13 +33,13 @@ public class TodoController {
         }
         throw new RuntimeException("No existe ese todo");
     }
-
+    //mapeo para eliminar un tod o
     @DeleteMapping(value = "api/{id}/todo")
     public void delete(@PathVariable("id") Long id) {
         service.delete(id);
 
     }
-
+    //mapeo para traer un tod o por el id
     @GetMapping(value = "api/{id}/todo")
     public Todo get(@PathVariable("id") Long id) {
         return service.get(id);

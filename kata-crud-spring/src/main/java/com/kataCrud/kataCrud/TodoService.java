@@ -8,6 +8,8 @@ public class TodoService {
     @Autowired
     private TodoRepository repository;
 
+
+    //creacion servicios basicos crud
     public Iterable<Todo> list(){
 
         return repository.findAll();
