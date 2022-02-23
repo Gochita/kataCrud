@@ -68,8 +68,8 @@ const Form = () => {
   return <form ref={formRef}>
     <input type="text" name='name' defaultValue={item.name} onChange={(event) => {
       setState({ ...state, name:event.target.value })
-    }}/>{item.id && <button onClick={onEdit}>Actualizar</button>}
-    {!item.id && <button onClick={onAdd}>Agregar</button>}
+    }}/>{item.id && <button className="btn btn-primary" onClick={onEdit}>Actualizar</button>}
+    {!item.id && <button className="btn btn-success" onClick={onAdd}>Agregar</button>}
   
     
   </form>
@@ -121,8 +121,8 @@ const Todo = () => {
               <td>{todo.id}</td>
               <td>{todo.name}</td>
               <td>{todo.isCompleted === true ? "SI": "NO"}</td>
-              <td><button onClick={() => onDelete(todo.id)}>Eliminar</button></td>
-              <td><button onClick={() => onEdit(todo)}>Editar</button></td>
+              <td><button className="btn btn-danger" onClick={() => onDelete(todo.id)}>Eliminar</button></td>
+              <td><button className="btn btn-warning" onClick={() => onEdit(todo)}>Editar</button></td>
             </tr>
           })
         }
