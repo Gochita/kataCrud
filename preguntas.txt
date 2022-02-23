@@ -1,0 +1,4 @@
+¿Que es lo que hace el fetch?
+¿Cual es la anotacion en java que permite el cruce de el front con el back?
+¿Es mejor utilizar funciones o hooks?
+¿Hay algun limite de importaciones para hooks?

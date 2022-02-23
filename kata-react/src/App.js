@@ -1,21 +1,25 @@
 import React, {createContext, useContext, useReducer, useEffect, useRef, useState} from 'react';
 
 const HOST_API = "http://localhost:8080/api";
+
+
 const initialState = {
   list: [],
   item: {}
 };
 const Store = createContext(initialState);
 
+
+//Componente de formulario
 const Form = () => {
   const formRef = useRef(null);
   const {dispatch,state : {item}} = useContext(Store);
   const [state, setState] = useState(item);
 
-
+//evento para añadir
   const onAdd = (event) => {
     event.preventDefault();
-
+//promise
     const request = {
       name: state.name,
       id: null,
@@ -36,10 +40,10 @@ const Form = () => {
       formRef.current.reset();
     });
   }
-
+//evento para editar 
   const onEdit = (event) => {
     event.preventDefault();
-
+//promise
     const request = {
       name: state.name,
       id: item.id,
@@ -71,10 +75,12 @@ const Form = () => {
   </form>
 }
 
+
+//Componente todo
 const Todo = () => {
 
   const {dispatch, state} = useContext(Store);
-
+//promise para actualizar la lista sin hacer refresh
   useEffect(() => {
     fetch(HOST_API+"/todos")
     .then(response => response.json())
@@ -83,7 +89,7 @@ const Todo = () => {
     })
   }, [state.list.length, dispatch])
 
-
+//evento para eliminar
   const onDelete = (id) =>{
     fetch(HOST_API + "/"+id+"/todo",{
       method: "DELETE"
@@ -93,13 +99,13 @@ const Todo = () => {
     })
   };
 
-
+//Evento para editar un item del todo
   const onEdit = (todo)  => {
     dispatch({ type: "edit-item",item: todo})
 
 
   };
-  return <div>
+  return <div>  
     <table>
       <thead>
         <tr>
@@ -125,6 +131,7 @@ const Todo = () => {
   </div>
 }
 
+//funcion que esta a la escucha para ejecutar los eventos
 function reducer(state, action) {
   switch (action.type) {
     case 'update-item':
@@ -154,6 +161,8 @@ function reducer(state, action) {
   }
 }
 
+
+//contenedor que usa el reducer
 const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -161,7 +170,7 @@ const StoreProvider = ({ children }) => {
     {children}
   </Store.Provider>
 }
-
+//ejecutable
 function App() {
   return (
     <StoreProvider>
